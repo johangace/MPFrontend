@@ -34,7 +34,6 @@ class App extends Component {
             <MeetingDetail isLoading={isLoading} data={data} />
           )}
         />
-        {/* <RenderProps> {MeetingList} </RenderProps> */}
       </div>
     );
   }
