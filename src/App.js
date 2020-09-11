@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect, Component } from 'react';
+import axios from 'axios';
+import Fetch from './middleware/RenderProps';
+import MeetingList from './views/MeetingList';
+import MeetingDetail from './views/MeetingDetail';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const URL = '/meetings/meetingapi';
+const getbyidURL = `/meetings/meetingapi/${1}`;
+class App extends Component {
+  state = {
+    meetings: [],
+  };
+
+  async componentDidMount() {
+    try {
+      const res = await axios.get(URL);
+      const meetings = await res.data;
+      this.setState({
+        meetings,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        Meeting Plnr
+        {/* <RenderProps>{MeetingList}</RenderProps> */}
+        <Fetch
+          url={`/meetings/meetingapi/${1}`}
+          render={({ data, isLoading }) => (
+            <MeetingDetail isLoading={isLoading} data={data} />
+          )}
+        />
+        {/* <RenderProps> {MeetingList} </RenderProps> */}
+      </div>
+    );
+  }
 }
 
 export default App;
