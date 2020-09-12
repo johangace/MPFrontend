@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect, Component } from 'react';
+import Fetch from '../middleware/RenderProps';
+const URL = '/meetings/meetingapi';
 
-const MeetingList = (props) => {
+const MeetingListData = (props) => {
+  console.log(props.data);
   return (
     <div>
       {props.data.map((item) => {
@@ -11,8 +14,25 @@ const MeetingList = (props) => {
           </div>
         );
       })}
-      <p>{props.isFetching ? 'Fetching posts...' : ''}</p>
     </div>
   );
 };
+
+class MeetingList extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <Fetch
+        url={URL}
+        render={({ data, isLoading }) => (
+          <MeetingListData isLoading={isLoading} data={data} />
+        )}
+      />
+    );
+  }
+}
+
 export default MeetingList;

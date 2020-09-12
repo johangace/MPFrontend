@@ -1,6 +1,7 @@
-import React from 'react';
-
-const MeetingList = (props) => {
+import React, { useState, useEffect, Component } from 'react';
+import Fetch from '../middleware/RenderProps';
+const URL = '/meetings/meetingapi';
+const MeetingDetailData = (props) => {
   return (
     <div key={props.data.id}>
       {props.isLoading && <h2>Loading...</h2>}
@@ -8,4 +9,23 @@ const MeetingList = (props) => {
     </div>
   );
 };
-export default MeetingList;
+
+class MeetingDetail extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <>
+        <Fetch
+          url={`${URL}/${1}`}
+          render={({ data, isLoading }) => (
+            <MeetingDetailData isLoading={isLoading} data={data} />
+          )}
+        />
+      </>
+    );
+  }
+}
+export default MeetingDetail;

@@ -46,7 +46,7 @@ export default class Fetch extends Component {
   };
 
   state = {
-    data: {},
+    data: [],
     isLoading: false,
   };
 
@@ -66,6 +66,7 @@ export default class Fetch extends Component {
   }
 
   render() {
+    console.log(this.state.data);
     return this.props.render(this.state);
   }
 }
