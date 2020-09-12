@@ -15,8 +15,8 @@ class App extends Component {
     return (
       <div>
         Meeting Plnr
-        {/* <RenderProps>{MeetingList}</RenderProps> */}
         <MeetingDetail />
+        <MeetingList />
       </div>
     );
   }
