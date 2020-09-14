@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Fetch from '../middleware/RenderProps';
-const URL = '/meetings/meetingapi';
 
+import axios from 'axios';
+const URL = '/meetings/meetingapi';
 const MeetingDetailData = (props) => {
   return (
     <div key={props.data.id}>
@@ -20,7 +21,7 @@ class MeetingDetail extends Component {
     return (
       <>
         <Fetch
-          url={`${URL}/${1}`}
+          url={`${URL}/${this.props.match.params.id}`}
           render={({ data, isLoading }) => (
             <MeetingDetailData isLoading={isLoading} data={data} />
           )}
@@ -29,4 +30,5 @@ class MeetingDetail extends Component {
     );
   }
 }
+
 export default MeetingDetail;

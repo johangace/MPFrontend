@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import Fetch from '../middleware/RenderProps';
-const URL = '/meetings/meetingapi';
 
+import { Redirect, Route, Switch, Link, withRouter } from 'react-router-dom';
+const URL = '/meetings/meetingapi';
 const MeetingListData = (props) => {
   console.log(props.data);
   return (
     <div>
       {props.data.map((item) => {
         return (
-          <div key={item.id}>
+          <Link to={`${item.id}`} color='primary'>
+            {' '}
             <h1>{item.title}</h1>
-            <span>{item.room}</span>
-          </div>
+            <h3> {item.id}</h3>
+          </Link>
         );
       })}
     </div>
