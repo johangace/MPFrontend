@@ -18,16 +18,20 @@ export default class Fetch extends Component {
   };
 
   _fetch = async () => {
-    // const res = await fetch(this.props.url);
     const res = await axios.get(this.props.url);
     const json = await res.data;
-    const id = json.id;
-    console.log(this.props.url);
 
-    this.setState({
-      data: json,
-      isLoading: false,
-    });
+    console.log(this.props.url);
+    if (res.status > 400) {
+      return this.setState(() => {
+        return { placeholder: 'Something went wrong!' };
+      });
+    } else {
+      this.setState({
+        data: json,
+        isLoading: false,
+      });
+    }
   };
 
   componentDidMount() {

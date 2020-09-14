@@ -1,38 +1,91 @@
-import React, { Component } from 'react';
-import Fetch from '../middleware/RenderProps';
+// import React, { Component } from 'react';
+// import Fetch from '../middleware/RenderProps';
+// import { Redirect, Route, Switch, Link, withRouter } from 'react-router-dom';
 
-import { Redirect, Route, Switch, Link, withRouter } from 'react-router-dom';
-const URL = '/meetings/meetingapi';
-const MeetingListData = (props) => {
-  console.log(props.data);
-  return (
-    <div>
-      {props.data.map((item) => {
-        return (
-          <Link to={`${item.id}`} color='primary'>
-            {' '}
-            <h1>{item.title}</h1>
-            <h3> {item.id}</h3>
-          </Link>
-        );
-      })}
-    </div>
-  );
-};
+// const URL = '/meetings/meetingapi';
+// const MeetingListData = (props) => {
+//   console.log(props.data);
+//   return (
+//     <div>
+//       {props.data.map((item) => {
+//         return (
+//           <Link to={`${item.id}`} color='primary'>
+//             {' '}
+//             <h1>
+//               {item.title} id:{item.id}
+//             </h1>
+//           </Link>
+//         );
+//       })}
+//     </div>
+//   );
+// };
+
+// class MeetingList extends Component {
+//   constructor(props) {
+//     super(props);
+//   }
+
+//   render() {
+//     return (
+//       <Fetch
+//         url={URL}
+//         render={({ data, isLoading }) => (
+//           <MeetingListData isLoading={isLoading} data={data} />
+//         )}
+//       />
+//     );
+//   }
+// }
+
+// export default MeetingList;
+
+import React, { Component } from 'react';
+import { Table } from 'reactstrap';
+import NewMeetingModal from './NewMeetingModal';
+
+import ConfirmRemovalModal from './ConfirmRemovalModal';
 
 class MeetingList extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
+    const meetings = this.props.meetings;
     return (
-      <Fetch
-        url={URL}
-        render={({ data, isLoading }) => (
-          <MeetingListData isLoading={isLoading} data={data} />
-        )}
-      />
+      <Table dark>
+        <thead>
+          <tr>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          {!meetings || meetings.length <= 0 ? (
+            <tr>
+              <td colSpan='6' align='center'>
+                <b>Ops, no one here yet</b>
+              </td>
+            </tr>
+          ) : (
+            meetings.map((meeting) => (
+              <tr key={meeting.id}>
+                {meeting.id}
+                <td>{meeting.title}</td>
+
+                <td align='center'>
+                  <NewMeetingModal
+                    create={false}
+                    meeting={meeting}
+                    resetState={this.props.resetState}
+                  />
+                  &nbsp;&nbsp;
+                  <ConfirmRemovalModal
+                    id={meeting.id}
+                    resetState={this.props.resetState}
+                  />
+                </td>
+              </tr>
+            ))
+          )}
+        </tbody>
+      </Table>
     );
   }
 }

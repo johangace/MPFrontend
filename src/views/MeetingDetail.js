@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Fetch from '../middleware/RenderProps';
+const URL = '/meetings/meetingapi/';
 
-import axios from 'axios';
-const URL = '/meetings/meetingapi';
 const MeetingDetailData = (props) => {
   return (
     <div key={props.data.id}>
