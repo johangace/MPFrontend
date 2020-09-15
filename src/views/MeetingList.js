@@ -1,44 +1,3 @@
-// import React, { Component } from 'react';
-// import Fetch from '../middleware/RenderProps';
-
-// const URL = '/meetings/meetingapi';
-// const MeetingListData = (props) => {
-//   console.log(props.data);
-//   return (
-//     <div>
-//       {props.data.map((item) => {
-//         return (
-//           <Link to={`${item.id}`} color='primary'>
-//             {' '}
-//             <h1>
-//               {item.title} id:{item.id}
-//             </h1>
-//           </Link>
-//         );
-//       })}
-//     </div>
-//   );
-// };
-
-// class MeetingList extends Component {
-//   constructor(props) {
-//     super(props);
-//   }
-
-//   render() {
-//     return (
-//       <Fetch
-//         url={URL}
-//         render={({ data, isLoading }) => (
-//           <MeetingListData isLoading={isLoading} data={data} />
-//         )}
-//       />
-//     );
-//   }
-// }
-
-// export default MeetingList;
-
 import React, { Component } from 'react';
 import { Table } from 'reactstrap';
 import NewMeetingModal from './NewMeetingModal';
@@ -53,6 +12,9 @@ class MeetingList extends Component {
         <thead>
           <tr>
             <th>Name</th>
+            <th>Date</th>
+            <th>Start Time</th>
+            <th>Room</th>
           </tr>
         </thead>
         <tbody>
@@ -67,7 +29,22 @@ class MeetingList extends Component {
               <tr key={meeting.id}>
                 <td>
                   <Link to={`${meeting.id}`} color='primary'>
-                    {meeting.title} {meeting.id}
+                    {meeting.title}
+                  </Link>
+                </td>
+                <td>
+                  <Link to={`${meeting.id}`} color='primary'>
+                    {meeting.date}
+                  </Link>
+                </td>
+                <td>
+                  <Link to={`${meeting.id}`} color='primary'>
+                    {meeting.start_time}
+                  </Link>
+                </td>
+                <td>
+                  <Link to={`${meeting.id}`} color='primary'>
+                    {meeting.room}
                   </Link>
                 </td>
                 <td align='center'>
