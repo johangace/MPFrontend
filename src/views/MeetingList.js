@@ -1,6 +1,5 @@
 // import React, { Component } from 'react';
 // import Fetch from '../middleware/RenderProps';
-// import { Redirect, Route, Switch, Link, withRouter } from 'react-router-dom';
 
 // const URL = '/meetings/meetingapi';
 // const MeetingListData = (props) => {
@@ -43,7 +42,7 @@
 import React, { Component } from 'react';
 import { Table } from 'reactstrap';
 import NewMeetingModal from './NewMeetingModal';
-
+import { Redirect, Route, Switch, Link, withRouter } from 'react-router-dom';
 import ConfirmRemovalModal from './ConfirmRemovalModal';
 
 class MeetingList extends Component {
@@ -66,9 +65,11 @@ class MeetingList extends Component {
           ) : (
             meetings.map((meeting) => (
               <tr key={meeting.id}>
-                {meeting.id}
-                <td>{meeting.title}</td>
-
+                <td>
+                  <Link to={`${meeting.id}`} color='primary'>
+                    {meeting.title} {meeting.id}
+                  </Link>
+                </td>
                 <td align='center'>
                   <NewMeetingModal
                     create={false}
