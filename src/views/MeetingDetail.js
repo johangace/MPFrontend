@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { API_URL } from '../constants';
+
 import { Col, Container, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Model } from '../models/Model.js';
+
 const MeetingDetailData = (props) => {
   return (
     <div key={props.meeting.id}>
@@ -23,9 +25,9 @@ export default class Meetingdetail extends Component {
   }
 
   getMeetingsById = () => {
-    axios
-      .get(`${API_URL}${this.props.match.params.id}`)
-      .then((res) => this.setState({ meeting: res.data }));
+    Model.fetchTodoDetail(this.props.match.params.id).then((json) => {
+      this.setState({ meeting: json });
+    });
   };
 
   resetState = () => {

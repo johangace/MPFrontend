@@ -4,7 +4,7 @@ import { Modal, ModalHeader, Button, ModalFooter } from 'reactstrap';
 import axios from 'axios';
 
 import { API_URL } from '../constants';
-
+import { Model } from '../models/Model.js';
 class ConfirmRemovalModal extends Component {
   state = {
     modal: false,
@@ -24,6 +24,7 @@ class ConfirmRemovalModal extends Component {
   };
 
   render() {
+    Model.fetchTodos();
     return (
       <Fragment>
         <Button color='danger' onClick={() => this.toggle()}>
